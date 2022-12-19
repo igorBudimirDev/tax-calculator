@@ -9,13 +9,16 @@ const App = () => {
   const [mainComponent, setMainComponent] = useState('incomeDetailsComponent');
   const [sideBar, setSideBar] = useState(false);
   return (
-    <div className="hero w-[85%] h-[100%] flex flex-col">
+    <div className="hero w-[85%] h-[100%] flex flex-col
+    lg:w-[60%]
+    2xl:w-[45%]">
       <div className="hero__header w-[100%] h-[10%] flex justify-between">
         <div className="hero__header--heading w-[70%] flex items-center gap-2">
-          <div className="svg-wrapper h-[100%] w-[15%] flex items-center">
+          <div className="svg-wrapper h-[100%] w-[15%] flex items-center
+          lg:w-[10%]">
             <House />
           </div>
-          <h2>Income Tax Calculator</h2>
+          <h2 className='sm:text-2xl'>Income Tax Calculator</h2>
         </div>
         <div className="hero__header-hamburger w-[30%] flex items-center justify-end cursor-pointer">
           <RxHamburgerMenu
@@ -39,7 +42,8 @@ const App = () => {
             setMainComponent('incomeDetailsComponent');
             setSideBar(false);
           }}
-          className="side-menu-btn1 w-[75%] h-[7%] bg-white uppercase opacity-100"
+          className="side-menu-btn1 w-[75%] h-[7%] bg-white uppercase opacity-100
+          sm:text-xl"
           style={{
             backgroundColor:
               mainComponent === 'incomeDetailsComponent' && '#4ECF20',
@@ -52,7 +56,8 @@ const App = () => {
             setMainComponent('incomeComponent');
             setSideBar(false);
           }}
-          className="side-menu-btn2 w-[75%] h-[7%] bg-white uppercase opacity-100"
+          className="side-menu-btn2 w-[75%] h-[7%] bg-white uppercase opacity-100
+          sm:text-xl"
           style={{
             backgroundColor: mainComponent === 'incomeComponent' && '#4ECF20',
           }}

@@ -70,3 +70,18 @@ button:disabled:hover {
   background: white;
   transform: rotate(45deg);
 }
+.side-menu-btn1 {
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.side-menu-btn2 {
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.table-wrapper {
+  overflow: auto;
+  overflow-x: scroll;
+}
+.tbl {
+ overflow-x:scroll;
+}

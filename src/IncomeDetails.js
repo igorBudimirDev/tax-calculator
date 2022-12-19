@@ -3,6 +3,7 @@ import { ReactDOM } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { HiArrowRight } from 'react-icons/hi';
 import { RiArrowUpSFill } from 'react-icons/ri';
+import BtnMenu from './small-components/BtnMenu';
 import { useState } from 'react';
 
 const IncomeDetails = () => {

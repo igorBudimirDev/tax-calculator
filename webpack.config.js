@@ -1,17 +1,17 @@
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
 
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "bundle.js",
-    clean:true,
+    path: path.join(__dirname, '/dist'),
+    filename: 'bundle.js',
+    clean: true,
   },
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
   ],
 
@@ -21,17 +21,24 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
       {
         test: /\.css$/i,
-        include: path.resolve(__dirname, "src"),
-        use: ["style-loader", "css-loader", "postcss-loader"],
-      }
+        include: path.resolve(__dirname, 'src'),
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /react-icons\/(.)*(.js)$/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['es2015', 'react'],
+        },
+      },
     ],
   },
 };

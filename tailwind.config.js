@@ -5,7 +5,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        purple: "#7652C6",
+        mainOverlay: "rgba(89, 89, 89, 0.4)",
+        mainGreen: "#4ECF20"
       },
     },
   },

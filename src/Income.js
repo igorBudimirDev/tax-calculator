@@ -83,7 +83,9 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
           className="relative w-[100%] flex justify-center items-center gap-1
       sm:text-2xl"
         >
-          <span>Your total {currentIncomeType === "grossState" ? "net" : "gross"}</span>
+          <span>
+            Your total {currentIncomeType === 'grossState' ? 'net' : 'gross'}
+          </span>
           <div className="btn-menu flex items-center">
             <div className="btn-wrapper relative">
               <button
@@ -194,7 +196,9 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
             className="text-2xl
         sm:text-3xl"
           >
-            {currentIncomeType === "grossState" ? `$${(currentIncome-currentTax).toFixed(0)}` : `$${(currentIncome+currentTax).toFixed(0)}`}
+            {currentIncomeType === 'grossState'
+              ? `$${(currentIncome - currentTax).toFixed(0)}`
+              : `$${(currentIncome + currentTax).toFixed(0)}`}
           </span>
         </div>
       </div>
@@ -218,33 +222,74 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
             <div className="tbl-row border-b border-b-slate-100">
               <div className="tbl-row grid grid-cols-4">
                 <div className="grid-col">Weekly</div>
-                <div className="grid-col">Gross Income</div>
+                <div className="grid-col">
+                  $
+                  {currentIncomeType === 'grossState'
+                    ? (currentIncome / 52).toFixed(0)
+                    : (Number(currentIncome + currentTax) / 52).toFixed(0)}
+                </div>
                 <div className="grid-col">${(currentTax / 52).toFixed(0)}</div>
-                <div className="grid-col">Net Income</div>
+                <div className="grid-col">
+                  $
+                  {currentIncomeType === 'netState'
+                    ? (currentIncome / 52).toFixed(0)
+                    : (Number(currentIncome - currentTax) / 52).toFixed(0)}
+                </div>
               </div>
             </div>
             <div className="tbl-row border-b border-b-slate-100">
               <div className="tbl-row grid grid-cols-4">
                 <div className="grid-col">Fortnightly</div>
-                <div className="grid-col">Gross Income</div>
+                <div className="grid-col">
+                  $
+                  {currentIncomeType === 'grossState'
+                    ? (currentIncome / 26).toFixed(0)
+                    : (Number(currentIncome + currentTax) / 26).toFixed(0)}
+                </div>
                 <div className="grid-col">${(currentTax / 26).toFixed(0)}</div>{' '}
-                <div className="grid-col">Net Income</div>
+                <div className="grid-col">
+                  $
+                  {currentIncomeType === 'netState'
+                    ? (currentIncome / 26).toFixed(0)
+                    : (Number(currentIncome - currentTax) / 26).toFixed(0)}
+                </div>
               </div>
             </div>
             <div className="tbl-row border-b border-b-slate-100">
               <div className="tbl-row grid grid-cols-4">
                 <div className="grid-col">Monthly</div>
-                <div className="grid-col">Gross Income</div>
+                <div className="grid-col">
+                  $
+                  {currentIncomeType === 'grossState'
+                    ? (currentIncome / 12).toFixed(0)
+                    : (Number(currentIncome + currentTax) / 12).toFixed(0)}
+                </div>
                 <div className="grid-col">${(currentTax / 12).toFixed(0)}</div>{' '}
-                <div className="grid-col">Net Income</div>
+                <div className="grid-col">
+                  $
+                  {currentIncomeType === 'netState'
+                    ? (currentIncome / 12).toFixed(0)
+                    : (Number(currentIncome - currentTax) / 12).toFixed(0)}
+                </div>
               </div>
             </div>
             <div className="tbl-row border-b border-b-slate-100">
               <div className="tbl-row grid grid-cols-4">
                 <div className="grid-col">Anually</div>
-                <div className="grid-col">Gross Income</div>
-                <div className="grid-col">${(currentTax).toFixed(0)}</div>{' '}
-                <div className="grid-col">Net Income</div>
+                <div className="grid-col">
+                  $
+                  {currentIncomeType === 'grossState'
+                    ? (currentIncome).toFixed(0)
+                    : (Number(currentIncome + currentTax)).toFixed(0)}
+                </div>
+                <div className="grid-col">${currentTax.toFixed(0)}</div>{' '}
+                <div className="grid-col">
+                  {' '}
+                  $
+                  {currentIncomeType === 'netState'
+                    ? (currentIncome).toFixed(0)
+                    : (Number(currentIncome - currentTax)).toFixed(0)}
+                </div>
               </div>
             </div>
           </div>

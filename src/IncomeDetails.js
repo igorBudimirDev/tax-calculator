@@ -157,7 +157,7 @@ const IncomeDetails = (props) => {
         </div>
       </div>
       <div
-        className="income-type h-[40%] w-[80%] rounded-[20px] flex flex-col items-center justify-around
+        className="income-type h-[40%] w-[80%] rounded-[20px] flex flex-col items-center justify-around bg-mainOverlay
       sm:justify-center sm:gap-5"
       >
         <h3 className="text-black sm:text-2xl">
@@ -171,7 +171,7 @@ const IncomeDetails = (props) => {
         >
           <button
             className="px-5 w-[80%] h-[100%] rounded-[15px] bg-white
-           hover:bg-mainGreen hover:text-white 
+           hover:bg-mainGreen hover:bg-opacity-[50%] focus:text-white 
            sm:text-xl
            lg:w-[40%] lg:h-[60%] lg:text-[1rem]"
             onClick={() => {
@@ -187,9 +187,9 @@ const IncomeDetails = (props) => {
           </button>
           <button
             className="px-5 w-[80%] h-[100%] rounded-[15px] bg-white 
-          hover:bg-mainGreen hover:text-white 
+          hover:bg-mainGreen hover:bg-opacity-[50%] focus:text-white 
           sm:text-xl
-          lg:w-[40%] lg:h-[60%]"
+          lg:w-[40%] lg:h-[60%] lg:text-[1rem]"
             onClick={() => {
               setIncomeType('netState');
               props.incomeType('netState');

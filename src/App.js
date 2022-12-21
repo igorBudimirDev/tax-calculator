@@ -5,6 +5,8 @@ import Income from './Income';
 import House from './small-components/House';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { TfiClose } from 'react-icons/tfi';
+import { useTransition } from 'react';
+import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
   const [mainComponent, setMainComponent] = useState('incomeDetailsComponent');
@@ -72,7 +74,7 @@ const App = () => {
         ${
           sideBar
             ? 'md:w-[30%] lg:w-[20%] 2xl:w-[15%] w-[30%] opacity-1'
-            : '2xl-w-[5%] w-[5%] opacity-0'
+            : '2xl-w-[5%] w-[5%] opacity-0 none'
         }
         ease-in-out duration-[0.5s] delay-100
         `}
@@ -133,8 +135,10 @@ const App = () => {
           Income
         </button>
       </div>
+      <AnimatePresence>
       {mainComponent === 'incomeDetailsComponent' ? (
         <IncomeDetails
+
           income={(value) => setincome(value)}
           incomeType={(value) => setIncomeType(value)}
           incomeFrequency={(value) => setIncomeFrequency(value)}
@@ -160,6 +164,7 @@ const App = () => {
           sideIncomeBar={sideBar}
         />
       )}
+      </AnimatePresence>
     </div>
   );
 };

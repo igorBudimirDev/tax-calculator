@@ -62,8 +62,13 @@ button:disabled:hover {
   background: white;
   transform: rotate(45deg);
 }
-.tbl {
+.table-wrapper {
  overflow-x:scroll;
+ overflow: auto;
+}
+.tbl {
+  overflow-x:scroll;
+  overflow: auto;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

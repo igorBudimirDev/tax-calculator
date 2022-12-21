@@ -5,7 +5,7 @@ import { HiArrowRight } from 'react-icons/hi';
 import { RiArrowUpSFill } from 'react-icons/ri';
 import BtnMenu from './small-components/BtnMenu';
 import { useState, useRef } from 'react';
-
+import {motion} from "framer-motion"
 const IncomeDetails = (props) => {
   const [focused, setFocused] = useState(false);
   const [income, setIncome] = useState(0);
@@ -97,11 +97,10 @@ const IncomeDetails = (props) => {
 
             <div
               className={`dropdown-menu
-            
             `}
             >
               <div
-                className={`dropdown-menu-box flex flex-col items-center justify-around transition-[0.45s]
+                className={`dropdown-menu-box flex flex-col items-center justify-around transition-[0.45s] border border-slate-500
                  w-[100px] md:w-[150px]
                 ${
                   dropdownState

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import { IoMdArrowDropdown } from 'react-icons/io';
+import {animate, motion} from "framer-motion"
 const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
+  
   const [sideBar, setSideBar] = useState(sideIncomeBar);
   const [dropdownState, setDropdownState] = useState(false);
   const [currentIncome, setCurrentIncome] = useState(income);
@@ -89,8 +91,20 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
       document.removeEventListener('mousedown', handlerb);
     };
   });
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5
+      }
+    }
+  }
   return (
-    <div className="income-details w-[100%] h-[70%] bg-mainOverlay rounded-[20px] flex flex-col items-center justify-center gap-5">
+    <motion.div 
+    initial="hidden"
+    animate="show"
+    className="income-details w-[100%] h-[70%] bg-mainOverlay rounded-[20px] flex flex-col items-center justify-center gap-5">
       <div
         className="wrapper h-[10%]
       lg:h-[20%]
@@ -108,7 +122,7 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
             <div
               ref={dropdownRef}
               className={`btn-wrapper relative
-            ${(sideBar ) &&'pointer-events-none'}
+            ${sideBar && 'pointer-events-none'}
             `}
             >
               <button
@@ -123,8 +137,8 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
               </button>
               <div className={`dropdown-menu`}>
                 <div
-                  className={`dropdown-menu-box flex flex-col items-center justify-around
-                  sm:h-[150px]
+                  className={`dropdown-menu-box flex flex-col border border-slate-400 items-center justify-around
+                  sm:h-[150px] w-[100px] md:w-[150px]
                   
                   `}
                   style={{
@@ -138,7 +152,7 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
                     className={`text-sm 
                   sm:text-[1.25rem]
                   lg:text-[1.120rem]
-                   ${(sideBar || !dropdownState ) &&'pointer-events-none'}`}
+                   ${(sideBar || !dropdownState) && 'pointer-events-none'}`}
                     onClick={() => {
                       setCurrentIncomeFrequency('Weekly');
                     }}
@@ -264,7 +278,7 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
       <div className="table-wrapper w-[80%] h-[40%] bg-white rounded-[20px]">
         <div
           className="tbl bg-white w-[170%] flex flex-col p-5 
-      sm:justify-around sm:h-[100%] sm:text-xl overflow-x-scroll
+      sm:justify-around sm:h-[100%] sm:text-xl
       2xl:w-[100%] 2xl:overflow-hidden 2xl:text-center"
         >
           <div className="tbl-head">
@@ -364,7 +378,7 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
           Apply now
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

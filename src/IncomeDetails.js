@@ -8,14 +8,16 @@ import { useState, useRef } from 'react';
 
 const IncomeDetails = (props) => {
   const [focused, setFocused] = useState(false);
-  const [income, setIncome] = useState(0);
+  const [income, setIncome] = useState(null);
   const [dropdownState, setDropdownState] = useState(false);
   const [incomeFrequency, setIncomeFrequency] = useState('Monthly');
   const [incomeType, setIncomeType] = useState('');
   useEffect(() => {
     props.incomeFrequency(incomeFrequency);
   }, [incomeFrequency]);
-
+  useEffect(() => {
+    setIncome(income);
+  }, []);
   let dropdownRef = useRef();
   useEffect(() => {
     let handler = (e) => {
@@ -45,7 +47,9 @@ const IncomeDetails = (props) => {
           <div className="flex items-center w-[82%] gap-1 pl-2">
             <span className="text-[14px] sm:text-xl">$</span>
             <input
+              value={income}
               className="w-[100%] h-[100%] sm:text-xl outline-none"
+              inputMode="numeric"
               type="number"
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
@@ -58,7 +62,8 @@ const IncomeDetails = (props) => {
           </div>
 
           <div
-            className="btn-menu flex justify-center relative w-[20%] h-[100%] border-l-[2px] border-l-mainOrange"
+            className="btn-menu flex justify-center relative 
+            md:w-[20%]"
             ref={dropdownRef}
           >
             <button
@@ -96,7 +101,9 @@ const IncomeDetails = (props) => {
                   }}
                   style={{
                     color: incomeFrequency === 'Weekly' && '#4ECF20',
-                    transform: !dropdownState ? 'translateX(-30px)' : 'translateX(0)',
+                    transform: !dropdownState
+                      ? 'translateX(-30px)'
+                      : 'translateX(0)',
                     transition: '0.5s',
                     opacity: open ? '1' : '0',
                   }}
@@ -112,7 +119,9 @@ const IncomeDetails = (props) => {
                   }}
                   style={{
                     color: incomeFrequency === 'Fortnightly' && '#4ECF20',
-                    transform: !dropdownState ? 'translateX(-30px)' : 'translateX(0)',
+                    transform: !dropdownState
+                      ? 'translateX(-30px)'
+                      : 'translateX(0)',
                     transition: '0.7s',
                     opacity: open ? '1' : '0',
                   }}
@@ -128,7 +137,9 @@ const IncomeDetails = (props) => {
                   }}
                   style={{
                     color: incomeFrequency === 'Monthly' && '#4ECF20',
-                    transform: !dropdownState ? 'translateX(-30px)' : 'translateX(0)',
+                    transform: !dropdownState
+                      ? 'translateX(-30px)'
+                      : 'translateX(0)',
                     transition: '0.8s',
                     opacity: open ? '1' : '0',
                   }}
@@ -144,7 +155,9 @@ const IncomeDetails = (props) => {
                   }}
                   style={{
                     color: incomeFrequency === 'Annually' && '#4ECF20',
-                    transform: !dropdownState ? 'translateX(-30px)' : 'translateX(0)',
+                    transform: !dropdownState
+                      ? 'translateX(-30px)'
+                      : 'translateX(0)',
                     transition: '0.9s',
                     opacity: open ? '1' : '0',
                   }}
@@ -209,7 +222,10 @@ const IncomeDetails = (props) => {
        sm:text-2xl
        lg:w-[25%]"
         disabled={incomeType === '' || income < 1 ? true : false}
-        onClick={() => props.mainComponent("incomeComponent")}
+        onClick={() => {
+          props.mainComponent('incomeComponent');
+          props.calculated(true);
+        }}
       >
         <span>Calculate</span>
         <HiArrowRight />

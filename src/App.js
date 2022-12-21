@@ -11,6 +11,7 @@ const App = () => {
   const [income, setincome] = useState(0);
   const [incomeType, setIncomeType] = useState('');
   const [incomeFrequency, setIncomeFrequency] = useState('Monthly');
+  const [calculated, setCalculated] = useState(false);
   return (
     <div
       className="hero w-[85%] h-[100%] flex flex-col 
@@ -77,6 +78,7 @@ const App = () => {
           }}
           className="side-menu-btn2 w-[75%] h-[7%] bg-white uppercase opacity-100
           sm:text-xl"
+          disabled={calculated ? false : true}
           style={{
             backgroundColor: mainComponent === 'incomeComponent' && '#4ECF20',
           }}
@@ -90,6 +92,7 @@ const App = () => {
           incomeType={(value) => setIncomeType(value)}
           incomeFrequency={(value) => setIncomeFrequency(value)}
           mainComponent={(value) => setMainComponent(value)}
+          calculated = {(value) => setCalculated(value)}
         />
       ) : (
         <Income

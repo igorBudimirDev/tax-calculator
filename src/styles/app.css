@@ -28,11 +28,7 @@ body,
   align-items: center;
 }
 .income-type { /*?||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
-    /* background-image: linear-gradient(
-    66.66deg,
-    #4fcf2060 -19.9%,
-    rgba(178, 214, 179, 0.527) 107.95%
-  );  */
+  background: radial-gradient(circle at 10% -20%, #4fcf20b7, #8bd00063, #b8d00056, #ddcc1575, #ffcc33b0);
 
 }
 

@@ -42,10 +42,10 @@ const IncomeDetails = (props) => {
                   ${focused && 'border border-mainGreen'}
         `}
         >
-          <div className="flex items-center w-[50%] gap-1 pl-2">
+          <div className="flex items-center w-[82%] gap-1 pl-2">
             <span className="text-[14px] sm:text-xl">$</span>
             <input
-              className="w-[70%] h-[100%] sm:text-xl outline-none"
+              className="w-[100%] h-[100%] sm:text-xl outline-none"
               type="number"
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
@@ -58,7 +58,7 @@ const IncomeDetails = (props) => {
           </div>
 
           <div
-            className="btn-menu flex items-right justify-end relative w-[20%]"
+            className="btn-menu flex justify-center relative w-[20%] h-[100%] border-l-[2px] border-l-mainOrange"
             ref={dropdownRef}
           >
             <button
@@ -74,15 +74,15 @@ const IncomeDetails = (props) => {
             <div className="dropdown-menu">
               <div
                 className={`dropdown-menu-box flex flex-col items-center justify-around transition-[0.45s]
-                sm:h-[200px]
+                sm:h-[170px]
                 ${
                   dropdownState
-                    ? 'h-[110px] sm:h-[200px] opacity-1'
+                    ? 'h-[110px] sm:h-[170px] opacity-1'
                     : 'h-20px opacity-0'
                 }
                 `}
                 style={{
-                  height: dropdownState ? '200px' : '20px',
+                  height: dropdownState ? '170px' : '20px',
                   opacity: dropdownState ? '1' : '0',
                   transition: '0.45s',
                 }}

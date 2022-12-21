@@ -8,7 +8,6 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
   const [currentIncomeFrequency, setCurrentIncomeFrequency] =
     useState(incomeFrequency);
   const [currentTax, setCurrentTax] = useState(0);
-
   let useIncome = currentIncome || 0;
 
   const taxCalculator = () => {
@@ -77,11 +76,13 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
     <div className="income-details w-[100%] h-[70%] bg-mainOverlay rounded-[20px] flex flex-col items-center justify-center gap-5">
       <div
         className="wrapper h-[10%]
-      lg:h-[20%] lg:flex lg:flex-col lg:items-center lg:gap-2"
+      lg:h-[20%]
+      md:w-[80%] md:flex lg:items-center lg:gap-2"
       >
         <div
           className="relative w-[100%] flex justify-center items-center gap-1
-      sm:text-2xl"
+      sm:text-2xl
+      md:h-[60%] md:p-5 md:bg-mainOrange md:rounded-[20px]"
         >
           <span>
             Your total {currentIncomeType === 'grossState' ? 'net' : 'gross'}
@@ -94,7 +95,7 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
                 }}
                 className="flex items-center"
               >
-                monthly
+                {currentIncomeFrequency}
                 <IoMdArrowDropdown />
               </button>
               <div className={`dropdown-menu`}>
@@ -114,11 +115,10 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
                   sm:text-[1.25rem]
                   lg:text-[1.120rem]"
                     onClick={() => {
-                      //setIncomeFrequency('Weekly');
+                      setCurrentIncomeFrequency('Weekly');
                     }}
                     style={{
-                      //color: incomeFrequency === 'Weekly' && '#4ECF20',
-                      //color: incomeFrequency === 'Weekly' && '#4ECF20',
+                      color: currentIncomeFrequency === 'Weekly' && '#4ECF20',
                       transform: !dropdownState
                         ? 'translateX(-30px)'
                         : 'translateX(0)',
@@ -133,10 +133,10 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
                   sm:text-[1.25rem]
                   lg:text-[1.120rem]"
                     onClick={() => {
-                      //setIncomeFrequency('Fortnightly');
+                      setCurrentIncomeFrequency('Fortnightly');
                     }}
                     style={{
-                      //color: incomeFrequency === 'Fortnightly' && '#4ECF20',
+                      color: currentIncomeFrequency === 'Fortnightly' && '#4ECF20',
                       transform: !dropdownState
                         ? 'translateX(-30px)'
                         : 'translateX(0)',
@@ -151,10 +151,10 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
                   sm:text-[1.25rem]
                   lg:text-[1.120rem]"
                     onClick={() => {
-                      //setIncomeFrequency('Monthly');
+                      setCurrentIncomeFrequency('Monthly');
                     }}
                     style={{
-                      //color: incomeFrequency === 'Monthly' && '#4ECF20',
+                      color: currentIncomeFrequency === 'Monthly' && '#4ECF20',
                       transform: !dropdownState
                         ? 'translateX(-30px)'
                         : 'translateX(0)',
@@ -169,10 +169,10 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
                   sm:text-[1.25rem]
                   lg:text-[1.120rem]"
                     onClick={() => {
-                      //setIncomeFrequency('Annually');
+                      setCurrentIncomeFrequency('Annually');
                     }}
                     style={{
-                      //color: incomeFrequency === 'Annually' && '#4ECF20',
+                      color: currentIncomeFrequency === 'Annually' && '#4ECF20',
                       transform: !dropdownState
                         ? 'translateX(-30px)'
                         : 'translateX(0)',
@@ -190,15 +190,33 @@ const Income = ({ income, incomeType, incomeFrequency }) => {
         </div>
         <div
           className="total-income h-[70%] bg-mainGreen text-black rounded-[20px] flex items-center justify-center
-        lg:w-[50%] lg: p-5"
+          md:h-[60%]
+          lg:w-[50%] lg: p-5"
         >
           <span
             className="text-2xl
         sm:text-3xl"
           >
-            {currentIncomeType === 'grossState'
-              ? `$${(currentIncome - currentTax).toFixed(0)}`
-              : `$${(currentIncome + currentTax).toFixed(0)}`}
+            {currentIncomeType === 'grossState' && currentIncomeFrequency === "Annually"
+            ? `$${(currentIncome - currentTax).toFixed(0)}` :
+            currentIncomeType === 'grossState' && currentIncomeFrequency === "Monthly"
+            ? `$${((currentIncome - currentTax) / 12).toFixed(0)}` :
+            currentIncomeType === 'grossState' && currentIncomeFrequency === "Fortnightly"
+            ? `$${((currentIncome - currentTax) / 26).toFixed(0)}` :
+            currentIncomeType === 'grossState' && currentIncomeFrequency === "Weekly"
+            ? `$${((currentIncome - currentTax) / 52).toFixed(0)}` :
+
+
+            currentIncomeType === 'netState' && currentIncomeFrequency === "Annually"
+            ? `$${(currentIncome + currentTax).toFixed(0)}` :
+            currentIncomeType === 'netState' && currentIncomeFrequency === "Monthly"
+            ? `$${((currentIncome + currentTax) / 12).toFixed(0)}` :
+            currentIncomeType === 'netState' && currentIncomeFrequency === "Fortnightly"
+            ? `$${((currentIncome + currentTax) / 26).toFixed(0)}` :
+            currentIncomeType === 'netState' && currentIncomeFrequency === "Weekly"
+            && `$${((currentIncome + currentTax) / 52).toFixed(0)}`}
+            
+             {/**`$${(currentIncome + currentTax).toFixed(0)}` */}
           </span>
         </div>
       </div>

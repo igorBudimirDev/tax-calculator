@@ -8,17 +8,25 @@ import { useState, useRef } from 'react';
 
 const IncomeDetails = (props) => {
   const [focused, setFocused] = useState(false);
-  const [income, setIncome] = useState(null);
+  const [income, setIncome] = useState(0);
   const [dropdownState, setDropdownState] = useState(false);
   const [incomeFrequency, setIncomeFrequency] = useState('Monthly');
   const [incomeType, setIncomeType] = useState('');
+  const [sideBar, setSideBar] = useState(false);
   useEffect(() => {
     props.incomeFrequency(incomeFrequency);
   }, [incomeFrequency]);
   useEffect(() => {
-    setIncome(income);
-  }, []);
+    setIncome(props.inputState);
+  }, [props.inputState]);
+  useEffect(() => {
+    setIncomeType(props.typeState);
+  }, [props.typeState]);
+  useEffect(() => {
+    setSideBar(props.sideBar);
+  }, [props.sideBar]);
   let dropdownRef = useRef();
+  let sideBarRef = useRef();
   useEffect(() => {
     let handler = (e) => {
       if (!dropdownRef.current.contains(e.target)) {
@@ -41,14 +49,17 @@ const IncomeDetails = (props) => {
 
         <div
           className={`total-income--input w-[80%] h-[80%] flex bg-white items-center justify-between rounded-[20px] transition duration-500
-                  ${focused && 'border border-mainGreen'}
+                  ${focused && 'border-2 border-mainOrange'}
         `}
         >
           <div className="flex items-center w-[82%] gap-1 pl-2">
-            <span className="text-[14px] sm:text-xl">$</span>
+            <span className="text-[16px] sm:text-xl mt-[1px]">$</span>
             <input
-              value={income}
-              className="w-[100%] h-[100%] sm:text-xl outline-none"
+              tabIndex="1"
+              value={(income > 0) && income}
+              className={`w-[100%] h-[100%] sm:text-xl outline-none
+              placeholder:text-[16px]'
+              `}
               inputMode="numeric"
               type="number"
               onFocus={() => setFocused(true)}
@@ -62,103 +73,137 @@ const IncomeDetails = (props) => {
           </div>
 
           <div
-            className="btn-menu flex justify-center relative 
-            md:w-[20%]"
+            className={`btn-menu flex justify-center relative 
+            md:w-[20%]
+            `}
             ref={dropdownRef}
           >
             <button
-              onClick={() => {
-                setDropdownState(!dropdownState);
+              disabled={sideBar ? true : false}
+              tabIndex="2"
+              onClick={(e) => {
+                !sideBar &&
+                  !e.target.disabled &&
+                  setDropdownState(!dropdownState);
+                console.log(e.target.disabled);
               }}
-              className="flex items-center sm:text-xl"
+              className={`flex items-center sm:text-xl
+              ${sideBar && 'pointer-events-none'}
+              `}
             >
               {incomeFrequency}
               <IoMdArrowDropdown />
             </button>
 
-            <div className="dropdown-menu">
+            <div
+              className={`dropdown-menu
+            
+            `}
+            >
               <div
                 className={`dropdown-menu-box flex flex-col items-center justify-around transition-[0.45s]
-                sm:h-[170px]
+                 w-[100px] md:w-[150px]
                 ${
                   dropdownState
-                    ? 'h-[110px] sm:h-[170px] opacity-1'
-                    : 'h-20px opacity-0'
+                    ? 'h-[120px] sm:h-[150px] opacity-1'
+                    : 'h-[20px] opacity-0'
                 }
                 `}
                 style={{
-                  height: dropdownState ? '170px' : '20px',
                   opacity: dropdownState ? '1' : '0',
                   transition: '0.45s',
                 }}
               >
                 <button
-                  className="text-sm 
+                  tabIndex="1"
+                  disabled={sideBar}
+                  className={`text-sm 
                   sm:text-[1.25rem]
-                  lg:text-[1.120rem]"
-                  onClick={() => {
-                    setIncomeFrequency('Weekly');
-                  }}
+                  lg:text-[1.120rem]
+                  ${(sideBar || !dropdownState) && 'pointer-events-none'}
+                `}
+                  onClick={
+                    !sideBar && dropdownState
+                      ? () => setIncomeFrequency('Weekly')
+                      : undefined
+                  }
                   style={{
                     color: incomeFrequency === 'Weekly' && '#4ECF20',
                     transform: !dropdownState
                       ? 'translateX(-30px)'
                       : 'translateX(0)',
-                    transition: '0.5s',
+                    transition: '0.3s',
                     opacity: open ? '1' : '0',
                   }}
                 >
                   Weekly
                 </button>
                 <button
-                  className="text-sm 
+                  className={`text-sm 
                   sm:text-[1.25rem]
-                  lg:text-[1.120rem]"
-                  onClick={() => {
-                    setIncomeFrequency('Fortnightly');
-                  }}
+                  lg:text-[1.120rem]
+                  ${(sideBar || !dropdownState) && 'pointer-events-none'}
+                  `}
+                  onClick={
+                    !sideBar && dropdownState
+                      ? () => setIncomeFrequency('Fortnightly')
+                      : undefined
+                  }
                   style={{
                     color: incomeFrequency === 'Fortnightly' && '#4ECF20',
                     transform: !dropdownState
                       ? 'translateX(-30px)'
                       : 'translateX(0)',
-                    transition: '0.7s',
+                    transition: '0.3s',
+                    transitionDelay: '0.2s',
                     opacity: open ? '1' : '0',
                   }}
                 >
                   Fortnightly
                 </button>
                 <button
-                  className="text-sm 
+                  disabled={sideBar}
+                  className={`text-sm 
                   sm:text-[1.25rem]
-                  lg:text-[1.120rem]"
-                  onClick={() => {
-                    setIncomeFrequency('Monthly');
-                  }}
+                  lg:text-[1.120rem]
+                  ${(sideBar || !dropdownState) && 'pointer-events-none'}
+                  `}
+                  onClick={
+                    !sideBar && dropdownState
+                      ? () => setIncomeFrequency('Monthly')
+                      : undefined
+                  }
                   style={{
                     color: incomeFrequency === 'Monthly' && '#4ECF20',
                     transform: !dropdownState
                       ? 'translateX(-30px)'
                       : 'translateX(0)',
-                    transition: '0.8s',
+                    transition: '0.3s',
+                    transitionDelay: '0.3s',
                     opacity: open ? '1' : '0',
                   }}
                 >
                   Monthly
                 </button>
                 <button
-                  className="text-sm 
+                  disabled={!sideBar && !dropdownState}
+                  className={`text-sm 
                   sm:text-[1.25rem]
-                  lg:text-[1.120rem]"
-                  onClick={() => {
-                    setIncomeFrequency('Annually');
-                  }}
+                  lg:text-[1.120rem]
+                  ${(sideBar || !dropdownState) && 'pointer-events-none'}
+                  `}
+                  onClick={
+                    !sideBar && dropdownState
+                      ? () => setIncomeFrequency('Annually')
+                      : undefined
+                  }
                   style={{
                     color: incomeFrequency === 'Annually' && '#4ECF20',
                     transform: !dropdownState
                       ? 'translateX(-30px)'
                       : 'translateX(0)',
-                    transition: '0.9s',
+                    transition: '0.3s',
+                    transitionDelay: '0.4s',
                     opacity: open ? '1' : '0',
                   }}
                 >
@@ -183,6 +228,7 @@ const IncomeDetails = (props) => {
         lg:flex-row lg:w-[80%] lg:justify-center"
         >
           <button
+            tabIndex="3"
             className="px-5 w-[80%] h-[100%] rounded-[15px] bg-white
            hover:bg-mainGreen hover:bg-opacity-[50%] focus:text-white 
            sm:text-xl
@@ -199,6 +245,7 @@ const IncomeDetails = (props) => {
             Gross Income
           </button>
           <button
+            tabIndex="4"
             className="px-5 w-[80%] h-[100%] rounded-[15px] bg-white 
           hover:bg-mainGreen hover:bg-opacity-[50%] focus:text-white 
           sm:text-xl

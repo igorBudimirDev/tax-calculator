@@ -113,7 +113,6 @@ const IncomeDetails = (props) => {
                 }}
               >
                 <button
-                  tabIndex="1"
                   disabled={sideBar}
                   className={`text-sm 
                   sm:text-[1.25rem]
@@ -262,6 +261,7 @@ const IncomeDetails = (props) => {
         </div>
       </div>
       <button
+        tabIndex="4"
         className="px-5 w-[80%] h-[10%] text-xl rounded-[15px] bg-white 
        hover:bg-mainGreen hover:text-white flex justify-center items-center gap-1
        sm:text-2xl

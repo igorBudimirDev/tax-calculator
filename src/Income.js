@@ -12,7 +12,6 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
     useState(incomeFrequency);
   const [currentTax, setCurrentTax] = useState(0);
   let useIncome = currentIncome || 0;
-  console.log(sideBar);
   useEffect(() => {
     setSideBar(sideIncomeBar);
   }, [sideIncomeBar]);
@@ -72,11 +71,11 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
     }
 
     setCurrentTax(tax);
-    //console.log(currentTax);
+
   };
   useEffect(() => {
     taxCalculator();
-    //console.log(currentTax);
+
   }, [currentIncome]);
   let dropdownRef = useRef();
   useEffect(() => {
@@ -91,19 +90,8 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
       document.removeEventListener('mousedown', handlerb);
     };
   });
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.5
-      }
-    }
-  }
   return (
-    <motion.div 
-    initial="hidden"
-    animate="show"
+    <div 
     className="income-details w-[100%] h-[70%] bg-mainOverlay rounded-[20px] flex flex-col items-center justify-center gap-5">
       <div
         className="wrapper h-[10%]
@@ -378,7 +366,7 @@ const Income = ({ income, incomeType, incomeFrequency, sideIncomeBar }) => {
           Apply now
         </button>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

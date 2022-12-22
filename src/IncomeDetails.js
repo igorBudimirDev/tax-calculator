@@ -85,7 +85,6 @@ const IncomeDetails = (props) => {
                 !sideBar &&
                   !e.target.disabled &&
                   setDropdownState(!dropdownState);
-                console.log(e.target.disabled);
               }}
               className={`flex items-center sm:text-xl
               ${sideBar && 'pointer-events-none'}

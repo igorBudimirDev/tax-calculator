@@ -5,9 +5,7 @@ import Income from './Income';
 import House from './small-components/House';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { TfiClose } from 'react-icons/tfi';
-import { useTransition } from 'react';
 import { AnimatePresence } from 'framer-motion';
-
 const App = () => {
   const [mainComponent, setMainComponent] = useState('incomeDetailsComponent');
   const [sideBar, setSideBar] = useState(false);
@@ -30,7 +28,6 @@ const App = () => {
       document.removeEventListener('mousedown', handler);
     };
   });
-
 
   return (
     <div
@@ -98,7 +95,7 @@ const App = () => {
             setMainComponent('incomeDetailsComponent');
             setSideBar(false);
           }}
-          disabled={sideBar? false : true}
+          disabled={sideBar ? false : true}
           className={`side-menu-btn1 w-[75%] h-[7%] bg-white uppercase opacity-100
           sm:text-xl
           ${
@@ -135,10 +132,8 @@ const App = () => {
           Income
         </button>
       </div>
-      <AnimatePresence>
       {mainComponent === 'incomeDetailsComponent' ? (
         <IncomeDetails
-
           income={(value) => setincome(value)}
           incomeType={(value) => setIncomeType(value)}
           incomeFrequency={(value) => setIncomeFrequency(value)}
@@ -164,7 +159,6 @@ const App = () => {
           sideIncomeBar={sideBar}
         />
       )}
-      </AnimatePresence>
     </div>
   );
 };
